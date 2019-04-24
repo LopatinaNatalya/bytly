@@ -57,7 +57,7 @@ def get_clicks_count(url, token):
   if bitlink is None:
     return None
 
-  for clicks_info in get_clicks_number(bitlink, TOKEN_API_BITLY):
+  for clicks_info in get_clicks_number(bitlink, token):
     clicks_count[clicks_info['date']] = clicks_info['clicks']
 
   return clicks_count
