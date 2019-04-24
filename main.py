@@ -1,8 +1,5 @@
 import requests, os, argparse, dotenv
 from dotenv import load_dotenv
-load_dotenv()
-
-TOKEN_API_BITLY = os.getenv("TOKEN_API_BITLY")
 
 
 def create_bitlink(url_to_check, token):
@@ -11,7 +8,7 @@ def create_bitlink(url_to_check, token):
   url = 'https://api-ssl.bitly.com/v4/bitlinks'
 
   body = {
-      "long_url": "{}".format(url_to_check)
+      "long_url": url_to_check
     }
 
   response = requests.post(url, headers=headers, json=body)
@@ -67,6 +64,10 @@ def get_clicks_count(url, token):
 
 
 def main():
+  load_dotenv()
+
+  TOKEN_API_BITLY = os.getenv("TOKEN_API_BITLY")
+
   parser = argparse.ArgumentParser(
        description='''Создание коротких ссылок или
        подсчет количества кликов, если ссылка уже создана'''
@@ -74,8 +75,6 @@ def main():
   parser.add_argument('url', help='Укажите ссылку')
   args = parser.parse_args()
   url = args.url
-
-  #url = input('Укажите ссылку: ')
 
   clicks_count = get_clicks_count(url, TOKEN_API_BITLY)
 
