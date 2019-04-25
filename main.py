@@ -66,7 +66,7 @@ def get_clicks_count(url, token):
 def main():
   load_dotenv()
 
-  TOKEN_API_BITLY = os.getenv("TOKEN_API_BITLY")
+  token_api_bitly = os.getenv("TOKEN_API_BITLY")
 
   parser = argparse.ArgumentParser(
        description='''Создание коротких ссылок или
@@ -76,10 +76,10 @@ def main():
   args = parser.parse_args()
   url = args.url
 
-  clicks_count = get_clicks_count(url, TOKEN_API_BITLY)
+  clicks_count = get_clicks_count(url, token_api_bitly)
 
   if clicks_count is None:
-    print('bitlink:', create_bitlink(url, TOKEN_API_BITLY))
+    print('bitlink:', create_bitlink(url, token_api_bitly))
   elif not clicks_count:
     print('Список кликов пуст')
   else:
